@@ -118,7 +118,7 @@
                         {{Form::close()}}
                     </div>
                     <div class="tab-pane" id="variablecost">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered table-condensed">
                             <thead>
                                 <tr>
                                     <th>Variabel</th>
@@ -193,6 +193,7 @@
 
                                         var saveUrl = "{{URL::to('project/addvariablecost')}}";
                                         jQuery.post(saveUrl, {"projectId": projectId, "variableId": variableId, "cost": cost}, function (data) {
+
                                             //tambahkan ke tabel
                                             jQuery('#tr-separator').before('<tr><td id="variable-name-' + variableId + '">' + variableName + '</td><td style="text-align:right;"><input type="text" name="variable_' + variableId + '" value="' + formatRupiahVal(cost) + '" id="variable_' + variableId + '" class="span2 uang" /></td><td style="font-size:1.3em;" ><a class="button-update" variableId="' + variableId + '" id="button_update_' + variableId + '" ><i class="icon-save"></i></a>&nbsp;<a class="button-delete" variableId="' + variableId + '" id="button_delete_' + variableId + '" ><i class="icon-trash"></i></a></td></tr>');
                                             //clear text input
@@ -206,6 +207,7 @@
                                         }).fail(function (data) {
                                             alert('simpan gagal');
                                         });
+
                                     } else {
                                         alert('Lengkapi data yang kosong');
                                         $('input[name=cost]').focus();
@@ -273,12 +275,12 @@
                                     });
                                 });
 
-
+                                //end of jquery
                             });
                         </script>
                     </div>
                     <div class="tab-pane" id="employees">
-                        <table class="table table-bordered">
+                        <table class="table table-bordered table-condensed">
                             <thead>
                                 <tr>
                                     <th>Employee</th>
@@ -289,13 +291,13 @@
                             <tbody>
                                 @foreach($project->employees as $emp)
                                 <tr>
-                                    <td>{{$emp->nama}}</td>
-                                    <td>
-                                        {{Form::text('employee_cost_'.$emp->id,$emp->cost_per_month)}}
+                                    <td id="employee-name-{{$emp->id}}">{{$emp->nama}}</td>
+                                    <td class="number">
+                                        {{Form::text('employee_cost_'.$emp->id,number_format($emp->pivot->cost_per_month,0,',','.'),array('class'=>'uang'))}}
                                     </td>
                                     <td style="font-size: 1.3em;">
-                                        <a class="btn-update-employee" ><i class="icon-save"></i></a>&nbsp;
-                                        <a class="btn-delete-employee" ><i class="icon-trash"></i></a>
+                                        <a employeeId="{{$emp->id}}" class="btn-update-employee" ><i class="icon-save"></i></a>&nbsp;
+                                        <a employeeId="{{$emp->id}}" class="btn-delete-employee" ><i class="icon-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
@@ -316,17 +318,137 @@
                             </tbody>
                         </table>
                         <script type="text/javascript">
-                            $(document).ready(function(){
+                            $(document).ready(function () {
                                 /**
                                  * Insert new Employee
                                  */
-                                $('#btn-add-employee').click(function(){
-                                   alert('ok');
+                                $('#btn-add-employee').click(function () {
+                                    //cek apa select employee masih ada atau kosong
+                                    if ($('select[name=employee] option').length > 0) {
+                                        var projectId = jQuery('input[name=projectId]').val();
+                                        var employeeId = $('select[name=employee]').val();
+                                        var employeeName = $('select[name=employee] option:selected').text();
+                                        var cost = unformatRupiahVal($('input[name=employee_cost]').val());
+                                        var saveUrl = "{{URL::to('project/addemployee')}}";
+
+                                        if (cost != '') {
+                                            $.post(saveUrl, {
+                                                "projectId": projectId,
+                                                "employeeId": employeeId,
+                                                "costpermonth": cost
+                                            }, function (data) {
+                                                //menambahkan ke dalam table
+                                                var newRow = '<tr><td id="employee-name-' + employeeId + '">' + employeeName + '</td>' +
+                                                        '<td class="number"><input name="employee_cost_' + employeeId + '" value="' + formatRupiahVal(cost) + '" class="uang"/>' +
+                                                        '</td><td style="font-size: 1.3em;">' +
+                                                        '<a employeeId="' + employeeId + '" class="btn-update-employee" ><i class="icon-save"></i></a>&nbsp;' +
+                                                        '<a employeeId="' + employeeId + '" class="btn-delete-employee" ><i class="icon-trash"></i></a></td></tr>';
+                                                $('#employee-tr-separator').before(newRow);
+                                                //clear input
+                                                $('input[name=employee_cost]').val('');
+                                                //remove item from select
+                                                $('select[name=employee]  option[value="' + employeeId + '"]').remove();
+                                                //fokus
+                                                $('input[name=employee_cost]').focus();
+                                                //END $.post success
+                                            }).fail(function (data) {
+                                                alert('Simpan Gagal');
+                                                //END $.post fail
+                                            });
+                                            //END IF COST != ''
+                                        } else {
+                                            alert('Lengkapi data yang kosong.');
+                                        }
+                                        //END IF $('select[name=employee] option
+                                    } else {
+                                        alert('Tidak ada data yang dapat ditambahkan');
+                                    }
+                                    //END OF button-add-employee click
                                 });
+
+                                /**
+                                 * Delete employee
+                                 */
+                                $(document).on('click', '.btn-delete-employee', function () {
+                                    var projectId = jQuery('input[name=projectId]').val();
+                                    var employeeId = $(this).attr('employeeId');
+                                    var employeeName = $.trim($('#employee-name-' + employeeId).text());
+                                    var delUrl = "{{URL::to('project/deleteemployee')}}";
+                                    var Obj = $(this);
+                                    $.post(delUrl, {"projectId": projectId, "employeeId": employeeId}, function (data) {
+                                        //remove from table
+                                        Obj.parent().parent().fadeOut(500);
+                                        //add employee to select employee
+                                        $('select[name=employee]').append($('<option>', {
+                                            value: employeeId,
+                                            text: employeeName
+                                        }));
+                                        //END OF .post 
+                                    }).fail(function (data) {
+                                        alert('delete gagal');
+                                    });
+                                    //END OF .button-delete-employee click
+                                });
+
+                                /**
+                                 * Update data employee
+                                 */
+                                $(document).on('click', '.btn-update-employee', function () {
+                                    var projectId = jQuery('input[name=projectId]').val();
+                                    var employeeId = $(this).attr('employeeId');
+                                    var cost = unformatRupiahVal($('input[name=employee_cost_' + employeeId + ']').val());
+                                    var updateurl = "{{URL::to('project/updateemployee')}}";
+                                    $.post(updateurl, {"projectid": projectId, "employeeid": employeeId, "cost": cost}, function (data) {
+                                        alert('update berhasil');
+                                    }).fail(function (data) {
+                                        alert('update gagal');
+                                    });
+                                });
+
+
+                                //END OF JQUERY
                             })
                         </script>
                     </div>
-                    <div class="tab-pane" id="modul"></div>
+                    <div class="tab-pane" id="modul">
+                        <table class="table table-bordered table-condensed">
+                            <thead>
+                            <th>Modul</th>
+                            <th>Desc</th>
+                            <th></th>
+                            </thead>
+                            <tbody>
+                                @foreach($project->moduls as $mod)
+                                <tr>
+                                    <td>
+                                        <input type="text" name="modul-name-{{$mod->id}}" id="modul-name-{{$mod->id}}" class="span4" />
+                                    </td>
+                                    <td>
+                                        <input type="text" name="modul-desc-{{$mod->id}}" id="modul-desc-{{$mod->id}}" class="span4"/>
+                                    </td>
+                                    <td>
+                                        <a modulid="{{$mod->id}}" class="btn-edit-modul"><i class="icon-save"></i></a>
+                                        <a modulid="{{$mod->id}}" class="btn-delete-modul"><i class="icon-trash"></i></a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                <tr>
+                                    <td colspan="3" style="background-color: whitesmoke;color:transparent;">.</td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="text" name="modul-name" id="modul-name" class="span4" />
+                                    </td>
+                                    <td>
+                                        <input type="text" name="modul-desc" id="modul-desc" class="span4"/>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-primary"  id="btn-add-modul"><i class="icon-plus"></i></a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <div class="tab-pane" id="fitur"></div>
                     <div class="tab-pane" id="cost"></div>
                 </div>

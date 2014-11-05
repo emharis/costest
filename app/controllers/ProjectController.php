@@ -24,7 +24,7 @@ class ProjectController extends \BaseController {
         foreach ($emps as $emp) {
             $empSel[$emp->id] = $emp->nama;
         }
-        
+                
         return \View::make('project.index', array(
                     'project' => $project,
                     'varsel' => $varSel,
@@ -81,7 +81,32 @@ class ProjectController extends \BaseController {
     public function postAddemployee(){
         $employeeId = \Input::get('employeeId');
         $costpermonth = \Input::get('costpermonth');
+        $projectId = \Input::get('projectId');
+        //get project object from db
+        $project = \App\Models\Project::find($projectId);
+        //attach new employee
+        $project->employees()->attach($employeeId,array('cost_per_month'=>$costpermonth));
         
+        return Employee::find($employeeId);
+    }
+    
+    public function postDeleteemployee(){
+        $employeeId = \Input::get('employeeId');
+        $projectId = \Input::get('projectId');
+        //get project object from db
+        $project = \App\Models\Project::find($projectId);
+        //delete employee
+        $project->employees()->detach(array($employeeId));
+        return $project->toJson();
+    }
+    
+    public function postUpdateemployee(){
+        $employeeId = \Input::get('employeeid');
+        $projectId = \Input::get('projectid');
+        $costpermonth = \Input::get('cost');
+        $project = \App\Models\Project::with('employees')->whereId($projectId)->first();
+        $project->employees()->updateExistingPivot($employeeId, array('cost_per_month'=>$costpermonth));
+        return $project->toJson();
     }
 
 }

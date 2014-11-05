@@ -29,4 +29,8 @@ class Project extends \Eloquent{
                         ->withTimestamps();
     }
     
+    public function moduls(){
+        return $this->hasMany('App\Models\Modul');
+    }
+    
 }

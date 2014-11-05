@@ -14,7 +14,7 @@
 Route::get('/',
 	function()
 	{
-		return View::make('hello');
+		return Redirect::to('home');
 	});
 
 Route::controller('home','App\Controllers\HomeController');
