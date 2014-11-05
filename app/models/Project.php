@@ -17,4 +17,16 @@ class Project extends \Eloquent{
     
     protected $table = 'project';
     
+    public function variablecosts(){
+         return $this->belongsToMany('App\Models\Variablecost', 'project_variable_cost', 'project_id', 'variablecost_id')
+                        ->withPivot(array('cost'))
+                        ->withTimestamps();
+    }
+    
+    public function employees(){
+         return $this->belongsToMany('App\Models\Employee', 'project_employees', 'project_id', 'employee_id')
+                        ->withPivot(array('cost_per_month','cost_per_hour'))
+                        ->withTimestamps();
+    }
+    
 }

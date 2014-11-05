@@ -17,4 +17,10 @@ class Employee extends \Eloquent{
     
     protected $table = 'employee';
     
+    public function projects(){
+         return $this->belongsToMany('App\Models\Project', 'project_employees', 'employee_id', 'project_id')
+                        ->withPivot(array('cost_per_month','cost_per_hour'))
+                        ->withTimestamps();
+    }
+    
 }
