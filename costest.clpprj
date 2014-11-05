@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="D:\Projects\client_source\costest\costest.clpprj">
+	<settings><PM_URL><![CDATA[D:/Projects/client_source/siams/]]></PM_URL><PM_HOME_URL><![CDATA[D:/Projects/client_source/siams/]]></PM_HOME_URL><PM_LIBS><![CDATA[]]></PM_LIBS><PM_FTP_CONNECTION><![CDATA[]]></PM_FTP_CONNECTION><PM_FTP_DIR><![CDATA[]]></PM_FTP_DIR><PM_FTP_UPLOAD_ON_SAVE><![CDATA[INT:0]]></PM_FTP_UPLOAD_ON_SAVE></settings><removed value=";"/><added value=""/><lastopfiles>
+	</lastopfiles>
+	<errors version="4.5">
+	</errors>
+	<codestructure version="5.0">
+		<phptree>
+			<treenode node="LARAVEL_START;PHP:PHP Word;D:\Projects\client_source\costest\bootstrap\autoload.php;f8;2;21;2;;;;vpos;;v;;rmicrotime(true;;d-1,-1;;b0,0;;m">
+			</treenode>
+			<treenode node="BaseController;PHP:Class Name;D:\Projects\client_source\costest\app\controllers\BaseController.php;f0;2;1;17;;;;vpos;;vController;;c;;r;;d40,2;;b0,0;;m">
+				<treenode node="setupLayout;PHP:Function Name;D:\Projects\client_source\costest\app\controllers\BaseController.php;f11;9;2;15;;;;vpos;;vvoid;;r&#xA;Description&#xA;     Setup the layout used by the controller.;;d1,10;;b2,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="DatabaseSeeder;PHP:Class Name;D:\Projects\client_source\costest\app\database\seeds\DatabaseSeeder.php;f0;2;1;16;;;;vpos;;vSeeder;;c;;r;;d36,2;;b0,0;;m">
+				<treenode node="run;PHP:Function Name;D:\Projects\client_source\costest\app\database\seeds\DatabaseSeeder.php;f8;9;2;14;;;;vpos;;vvoid;;r&#xA;Description&#xA;     Run the database seeds.;;d1,10;;b1,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="ExampleTest;PHP:Class Name;D:\Projects\client_source\costest\app\tests\ExampleTest.php;f0;2;1;16;;;;vpos;;vTestCase;;c;;r;;d35,2;;b0,0;;m">
+				<treenode node="testBasicExample;PHP:Function Name;D:\Projects\client_source\costest\app\tests\ExampleTest.php;f8;9;2;14;;;;vpos;;vvoid;;r&#xA;Description&#xA;     A basic functional test example.;;d1,10;;b1,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="HomeController;PHP:Class Name;D:\Projects\client_source\costest\app\controllers\HomeController.php;f0;2;1;22;;;;vpos;;vBaseController;;c;;r;;d44,2;;b0,0;;m">
+				<treenode node="showWelcome;PHP:Function Name;D:\Projects\client_source\costest\app\controllers\HomeController.php;f8;17;2;20;;;;vpos;;v;;r;;d1,18;;b1,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="TestCase;PHP:Class Name;D:\Projects\client_source\costest\app\tests\TestCase.php;f0;2;33;2;;;;vpos;;vIlluminate;;c;;r;;d-1,-1;;b0,0;;m">
+			</treenode>
+			<treenode node="User;PHP:Class Name;D:\Projects\client_source\costest\app\models\User.php;f0;7;1;25;;;;vpos;;vEloquent;;cUserInterface;;cRemindableInterface;;c;;r;;d74,7;;b0,0;;m">
+				<treenode node="hidden;PHP:Var Name;D:\Projects\client_source\costest\app\models\User.php;f11;23;18;23;;;;vposarray;;v;;r;;d-1,-1;;b2,0;;m">
+				</treenode>
+				<treenode node="table;PHP:Var Name;D:\Projects\client_source\costest\app\models\User.php;f11;16;17;16;;;;vposstring;;v;;r;;d-1,-1;;b2,0;;m">
+				</treenode>
+			</treenode>
+			<treenode node="createApplication;PHP:Function Name;D:\Projects\client_source\costest\app\tests\TestCase.php;f8;9;2;16;;;;vpos;;v;;r&#xA;Description&#xA;     Creates the application.;;d1,10;;b1,0;;m">
+			</treenode>
+			<treenode node="_SERVER;PHP:Var Name;D:\Projects\client_source\costest\server.php;f17;2;25;2;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			</treenode>
+			<treenode node="app;PHP:Var Name;D:\Projects\client_source\costest\public\index.php;f0;34;4;34;;D:\Projects\client_source\costest\bootstrap\start.php;f0;13;4;13;;;;vpos;;v;;r&#xA;Description&#xA;     Laravel - A PHP Framework For Web Artisans;;d-1,-1;;b0,0;;m">
+			</treenode>
+			<treenode node="code;PHP:Var Name;D:\Projects\client_source\costest\app\start\global.php;f42;48;47;48;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			</treenode>
+			<treenode node="compiled;PHP:Var Name;D:\Projects\client_source\costest\bootstrap\autoload.php;f16;29;25;29;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			</treenode>
+			<treenode node="env;PHP:Var Name;D:\Projects\client_source\costest\bootstrap\start.php;f0;26;4;26;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			</treenode>
+			<treenode node="exception;PHP:Var Name;D:\Projects\client_source\costest\app\start\global.php;f30;48;40;48;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			</treenode>
+			<treenode node="framework;PHP:Var Name;D:\Projects\client_source\costest\bootstrap\start.php;f0;56;10;56;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			</treenode>
+			<treenode node="paths;PHP:Var Name;D:\Projects\client_source\costest\server.php;f0;6;6;6;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			</treenode>
+			<treenode node="request;PHP:Var Name;D:\Projects\client_source\costest\app\filters.php;f21;13;29;13;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			</treenode>
+			<treenode node="requested;PHP:Var Name;D:\Projects\client_source\costest\server.php;f0;8;10;8;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			</treenode>
+			<treenode node="response;PHP:Var Name;D:\Projects\client_source\costest\app\filters.php;f30;19;39;19;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			</treenode>
+			<treenode node="uri;PHP:Var Name;D:\Projects\client_source\costest\server.php;f0;2;4;2;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			</treenode>
+			<treenode node="workbench;PHP:Var Name;D:\Projects\client_source\costest\bootstrap\autoload.php;f11;71;21;71;;;;vpos;;v;;r;;d-1,-1;;b0,0;;m">
+			</treenode>
+		</phptree>
+		<jstree>
+		</jstree>
+		<scsstree>
+		</scsstree>
+		<lesstree>
+		</lesstree>
+	</codestructure><cakedata>
+	</cakedata>
+	<dplmenupath>
+	</dplmenupath><laravael>
+	</laravael><smartyassings>
+	</smartyassings><twigtemplate>
+	</twigtemplate><yiidata>
+	</yiidata>
+	<todoblock>
+	</todoblock>
+	<dbgurls>
+	</dbgurls>
+	<filescache>
+		<file name="D:\Projects\client_source\costest\public\robots.txt" crc="-973547864"/>
+		<file name="D:\Projects\client_source\costest\public\index.php" crc="2018632784"/>
+		<file name="D:\Projects\client_source\costest\public\.htaccess" crc="1420350354"/>
+		<file name="D:\Projects\client_source\costest\bootstrap\start.php" crc="160163817"/>
+		<file name="D:\Projects\client_source\costest\bootstrap\paths.php" crc="-1018431882"/>
+		<file name="D:\Projects\client_source\costest\bootstrap\autoload.php" crc="1498509483"/>
+		<file name="D:\Projects\client_source\costest\app\views\emails\auth\reminder.blade.php" crc="-1621586023"/>
+		<file name="D:\Projects\client_source\costest\app\views\hello.php" crc="849507473"/>
+		<file name="D:\Projects\client_source\costest\app\tests\TestCase.php" crc="1742059573"/>
+		<file name="D:\Projects\client_source\costest\app\tests\ExampleTest.php" crc="-2015859371"/>
+		<file name="D:\Projects\client_source\costest\app\start\local.php" crc="1478212588"/>
+		<file name="D:\Projects\client_source\costest\app\start\global.php" crc="-1768094332"/>
+		<file name="D:\Projects\client_source\costest\app\start\artisan.php" crc="1980056347"/>
+		<file name="D:\Projects\client_source\costest\app\models\User.php" crc="1370686880"/>
+		<file name="D:\Projects\client_source\costest\app\lang\en\validation.php" crc="1879864529"/>
+		<file name="D:\Projects\client_source\costest\app\lang\en\reminders.php" crc="-511590174"/>
+		<file name="D:\Projects\client_source\costest\app\lang\en\pagination.php" crc="-1338948279"/>
+		<file name="D:\Projects\client_source\costest\app\database\seeds\DatabaseSeeder.php" crc="-1449418577"/>
+		<file name="D:\Projects\client_source\costest\app\controllers\HomeController.php" crc="1937842643"/>
+		<file name="D:\Projects\client_source\costest\app\controllers\BaseController.php" crc="-1174402931"/>
+		<file name="D:\Projects\client_source\costest\app\config\testing\session.php" crc="2006947881"/>
+		<file name="D:\Projects\client_source\costest\app\config\testing\cache.php" crc="-846181546"/>
+		<file name="D:\Projects\client_source\costest\app\config\local\database.php" crc="-1922095028"/>
+		<file name="D:\Projects\client_source\costest\app\config\local\app.php" crc="1275230531"/>
+		<file name="D:\Projects\client_source\costest\app\config\workbench.php" crc="1795406991"/>
+		<file name="D:\Projects\client_source\costest\app\config\view.php" crc="-1265186549"/>
+		<file name="D:\Projects\client_source\costest\app\config\session.php" crc="919276131"/>
+		<file name="D:\Projects\client_source\costest\app\config\services.php" crc="-1863885721"/>
+		<file name="D:\Projects\client_source\costest\app\config\remote.php" crc="1722247078"/>
+		<file name="D:\Projects\client_source\costest\app\config\queue.php" crc="-1984918896"/>
+		<file name="D:\Projects\client_source\costest\app\config\mail.php" crc="-1790951093"/>
+		<file name="D:\Projects\client_source\costest\app\config\database.php" crc="1061927475"/>
+		<file name="D:\Projects\client_source\costest\app\config\compile.php" crc="-1712500634"/>
+		<file name="D:\Projects\client_source\costest\app\config\cache.php" crc="983235121"/>
+		<file name="D:\Projects\client_source\costest\app\config\auth.php" crc="-763595111"/>
+		<file name="D:\Projects\client_source\costest\app\config\app.php" crc="126061417"/>
+		<file name="D:\Projects\client_source\costest\app\routes.php" crc="165837696"/>
+		<file name="D:\Projects\client_source\costest\app\filters.php" crc="-287489410"/>
+		<file name="D:\Projects\client_source\costest\server.php" crc="1525282280"/>
+		<file name="D:\Projects\client_source\costest\phpunit.xml" crc="-1781811576"/>
+	</filescache>
+</project>
