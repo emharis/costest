@@ -11,7 +11,19 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('hello');
-});
+Route::get('/',
+	function()
+	{
+		return View::make('hello');
+	});
+
+Route::controller('home','App\Controllers\HomeController');
+Route::controller('project','App\Controllers\ProjectController');
+
+Route::group(array('prefix'=> 'master'),
+	function()
+	{
+		Route::controller('variable','App\Controllers\VariableController');		
+		Route::controller('employee','App\Controllers\EmployeeController');		
+	}
+);

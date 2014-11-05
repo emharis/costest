@@ -1,6 +1,8 @@
 <?php
 
-class HomeController extends BaseController {
+namespace App\Controllers;
+
+class HomeController extends \BaseController {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -15,9 +17,24 @@ class HomeController extends BaseController {
 	|
 	*/
 
-	public function showWelcome()
-	{
-		return View::make('hello');
+	public function getIndex(){
+		$projects = \App\Models\Project::all();
+		return \View::make('home.index',array(
+			'projects' => $projects
+		));
+	}
+	
+	public function getNewproject(){
+		return \View::make('home.new');
+	}
+	
+	public function postNewproject(){
+		$project = new \App\Models\Project();
+		$project->nama_project = \Input::get('nama');
+		$project->icon_str = \Input::get('icon_str');
+		$project->save();
+		
+		return \Redirect::to('home');
 	}
 
 }
