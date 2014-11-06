@@ -421,18 +421,18 @@
                                 @foreach($project->moduls as $mod)
                                 <tr>
                                     <td>
-                                        <input type="text" name="modul-name-{{$mod->id}}" id="modul-name-{{$mod->id}}" class="span4" />
+                                        <input type="text" value="{{$mod->nama}}" name="modul-name-{{$mod->id}}" id="modul-name-{{$mod->id}}" class="span4" />
                                     </td>
                                     <td>
-                                        <input type="text" name="modul-desc-{{$mod->id}}" id="modul-desc-{{$mod->id}}" class="span4"/>
+                                        <input type="text" value="{{$mod->desc}}" name="modul-desc-{{$mod->id}}" id="modul-desc-{{$mod->id}}" class="span4"/>
                                     </td>
-                                    <td>
-                                        <a modulid="{{$mod->id}}" class="btn-edit-modul"><i class="icon-save"></i></a>
+                                    <td style="font-size: 1.3em;">
+                                        <a modulid="{{$mod->id}}" class="btn-update-modul"><i class="icon-save"></i></a>&nbsp;
                                         <a modulid="{{$mod->id}}" class="btn-delete-modul"><i class="icon-trash"></i></a>
                                     </td>
                                 </tr>
                                 @endforeach
-                                <tr>
+                                <tr id="modul-tr-separator">
                                     <td colspan="3" style="background-color: whitesmoke;color:transparent;">.</td>
                                 </tr>
                                 <tr>
@@ -448,6 +448,80 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <script type="text/javascript">
+                            $(document).ready(function () {
+                                /**
+                                 * Add new modul
+                                 */
+                                $('#btn-add-modul').click(function () {
+                                    var projectId = jQuery('input[name=projectId]').val();
+                                    var modul = $('input[name=modul-name]').val();
+                                    var desc = $('input[name=modul-desc]').val();
+                                    var saveUrl = "{{URL::to('project/addmodul')}}";
+
+                                    //cek jika nama modul kosong
+                                    if (modul == '') {
+                                        alert('lengkapi data yang kosong.');
+                                        $('input[name=modul-name]').focus();
+                                    } else {
+                                        //simpan data
+                                        $.post(saveUrl, {"projectid": projectId, "nama": modul, "desc": desc}, function (data) {
+                                            //clear input
+                                            $('input[name=modul-name]').val('');
+                                            $('input[name=modul-desc]').val('');
+                                            //set focus
+                                            $('input[name=modul-name]').focus();
+                                            //tambahkan ke tabel
+                                            var modulObj = JSON.parse(data);
+                                            var newrow = '<tr><td><input type="text" value="' + modulObj.nama + '" name="modul-name-' + modulObj.id + '" id="modul-name-' + modulObj.id + '" class="span4" />' +
+                                                    '</td><td><input type="text" value="' +  modulObj.desc  + '" name="modul-desc-' + modulObj.id + '" id="modul-desc-' + modulObj.id + '" class="span4"/>' +
+                                                    '</td><td style="font-size:1.3em;" ><a modulid="' + modulObj.id + '" class="btn-update-modul"><i class="icon-save"></i></a>' +
+                                                    '&nbsp;<a modulid="' + modulObj.id + '" class="btn-delete-modul"><i class="icon-trash"></i></a></td></tr>';
+                                            $('#modul-tr-separator').before(newrow);
+                                        }).fail(function () {
+                                            alert('Simpan data modul gagal.');
+                                        });
+                                    }
+
+                                    //END of Add New Modul
+                                });
+                                
+                                /**
+                                 * Update Modul
+                                 */
+                                 $(document).on('click','.btn-update-modul',function(){
+                                    var projectId = jQuery('input[name=projectId]').val();
+                                    var modulId = $(this).attr('modulid');
+                                    var modulName = $('input[name=modul-name-'+modulId+']').val();
+                                    var modulDesc = $('input[name=modul-desc-'+modulId+']').val();
+                                    var updateUrl = "{{URL::to('project/updatemodul')}}";
+                                    $.post(updateUrl,{"modulid":modulId,"nama":modulName,"desc":modulDesc},function(data){
+                                        alert('Update modul ok');
+                                    }).fail(function(data){
+                                        alert('Update modul gagal');
+                                    });
+                                    //END OF UPDATE MODUL
+                                 });
+                                 
+                                 /**
+                                 * Delete Modul
+                                 */
+                                 $(document).on('click','.btn-delete-modul',function(){
+                                    var modulId = $(this).attr('modulid');
+                                    var delUrl = "{{URL::to('project/deletemodul')}}";
+                                    var obj = $(this);
+                                    $.post(delUrl,{"modulid":modulId},function(data){
+                                        //remove from table
+                                        obj.parent().parent().fadeOut(500);
+                                    }).fail(function(data){
+                                        alert('Update modul gagal');
+                                    });
+                                    //END OF Delete MODUL
+                                 });
+                                
+                                //END of jquery
+                            });
+                        </script>
                     </div>
                     <div class="tab-pane" id="fitur"></div>
                     <div class="tab-pane" id="cost"></div>

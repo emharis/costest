@@ -108,5 +108,31 @@ class ProjectController extends \BaseController {
         $project->employees()->updateExistingPivot($employeeId, array('cost_per_month'=>$costpermonth));
         return $project->toJson();
     }
+    
+    public function postAddmodul(){
+        $modul = new \App\Models\Modul();
+        $modul->nama = \Input::get('nama');
+        $modul->desc = \Input::get('desc');
+        $modul->project_id = \Input::get('projectid');
+        $modul->save();
+        
+        return $modul->toJson();
+    }
+    
+    public function postUpdatemodul(){
+        $modul = \App\Models\Modul::find(\Input::get('modulid'));
+        $modul->nama = \Input::get('nama');
+        $modul->desc = \Input::get('desc');
+        $modul->save();
+        
+        return $modul->toJson();
+    }
+    
+    public function postDeletemodul(){
+        $modul = \App\Models\Modul::find(\Input::get('modulid'));
+        $modul->delete();
+        
+        return $modul->toJson();
+    }
 
 }
