@@ -40,7 +40,11 @@ class ProjectController extends \BaseController {
         $project->cp = \Input::get('cp');
         $project->status = \Input::get('status');
         $project->margin = \Input::get('margin');
+        $project->margin_2 = \Input::get('margin_2');
         $project->desc = \Input::get('desc');
+        $project->hour_per_month = \Input::get('hour_per_month');
+        $project->pph = \Input::get('pph');
+        $project->ppn = \Input::get('ppn');
         $project->save();
 
         return \Redirect::to('project/open/' . $project->id);
@@ -133,6 +137,49 @@ class ProjectController extends \BaseController {
         $modul->delete();
         
         return $modul->toJson();
+    }
+    
+    public function getModuls(){
+        return \App\Models\Modul::all()->toJson();
+    }
+    
+    public function getFiturs($modulId){
+        return \App\Models\Fitur::where('modul_id',$modulId)->get()->toJson();
+    }
+    
+    public function postAddfitur(){
+//        $modul = \App\Models\Modul::find(\input::get('modulid'));
+        $fitur = new \App\Models\Fitur();
+        $fitur->modul_id = \Input::get('modulid');
+        $fitur->nama = \Input::get('nama');
+        $fitur->bobot = \Input::get('bobot');
+        $fitur->save();
+        
+        return $fitur->toJson();
+    }
+    
+    public function postUpdatefitur(){
+        $fitur = \App\Models\Fitur::find(\Input::get('fiturid'));
+        $fitur->nama = \Input::get('nama');
+        $fitur->bobot = \Input::get('bobot');
+        $fitur->save();
+        
+        return $fitur->toJson();
+    }
+    
+    public function postDeletefitur(){
+        $fitur = \App\Models\Fitur::find(\Input::get('fiturid'));
+        $fitur->delete();
+        
+        return $fitur->toJson();
+    }
+    
+    public function getCostest($projectId){
+        $project = \App\Models\Project::find($projectId);        
+                
+        return \View::make('project.costest', array(
+                    'project' => $project
+        ));
     }
 
 }

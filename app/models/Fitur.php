@@ -13,16 +13,12 @@ namespace App\Models;
  *
  * @author Eries
  */
-class Modul extends \Eloquent{
+class Fitur extends \Eloquent{
     
-    protected $table = 'modul';
+    protected $table = 'fitur';
     
-    public function project(){
-         return $this->belongsTo('App\Models\Project');
-    }
-    
-    public function fiturs(){
-        return $this->hasMany('App\Models\Fitur');
+    public function modul(){
+         return $this->belongsTo('App\Models\Modul');
     }
     
 }

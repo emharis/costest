@@ -33,4 +33,8 @@ class Project extends \Eloquent{
         return $this->hasMany('App\Models\Modul');
     }
     
+    public function fiturs(){
+        return $this->hasManyThrough('App\Models\Fitur','App\Models\Modul');
+    }
+    
 }
