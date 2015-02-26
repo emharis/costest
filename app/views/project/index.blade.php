@@ -12,9 +12,9 @@
             <div class="tabbable">
                 <ul class="nav nav-tabs">
                     <li class="active" >
-                        <a href="#projectprofile" data-toggle="tab">Project Profile</a>
+                        <a id="tab-home" href="#projectprofile" data-toggle="tab">Project Profile</a>
                     </li>
-                    <li><a href="#variablecost" data-toggle="tab">Variable Cost</a></li>
+                    <li><a id="tab-variable-cost" href="#variablecost" data-toggle="tab">Variable Cost</a></li>
                     <li><a href="#employees" data-toggle="tab">Employees</a></li>
                     <li><a href="#modul" data-toggle="tab">Modul</a></li>
                     <li><a href="#fitur" data-toggle="tab">Fitur</a></li>
@@ -285,7 +285,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                <tr id="form-input-fitur">
                                     <td>
                                         <input type="text" name="input-fitur" class="span6" />
                                     </td>
@@ -615,7 +615,8 @@
 
 
         function fillSelectModul() {
-            var getModulUrl = "{{URL::to('project/moduls')}}";
+            var projectId = jQuery('input[name=projectId]').val();
+            var getModulUrl = "{{URL::to('project/moduls')}}/"+projectId;
             var modulList;
             $.ajax({
                 type: 'GET',
@@ -625,7 +626,8 @@
                     var select = $("select[name=select-modul]");
                     var options = '';
                     select.empty();
-
+                    //option untuk semua
+                    options += "<option value='-1'>Semua</option>";
                     for (var i = 0; i < data.length; i++)
                     {
                         options += "<option value='" + data[i].id + "'>" + data[i].nama + "</option>";
@@ -646,8 +648,8 @@
 
         function showFitur() {
             var modulId = $('select[name=select-modul]').val();
-            var getGiturUrl = "{{URL::to('project/fiturs')}}" + "/" + modulId;
-
+            var projectId = jQuery('input[name=projectId]').val();
+            var getGiturUrl = "{{URL::to('project/fiturs')}}" + "/" + modulId + "/" + projectId;
             //clear tr 
             $('.fitur-tr').remove();
 
@@ -666,6 +668,14 @@
                                 '<td style="font-size:1.3em;" ><a class="btn-update-fitur" fiturid="' + data[i].id + '" ><i class="icon-save" ></i></a>&nbsp;<a class="btn-delete-fitur" fiturid="' + data[i].id + '" ><i class="icon-trash" ></i></a></td>' +
                                 '</tr>';
                         $('#fitur-tr-separator').after(newrow);
+                    }
+                    
+                    //jika tampilkan semua maka sembunyikan tombol tambah dan inputannya
+                    if(modulId==-1){
+                        //sembunyikan input
+                        $('#form-input-fitur').hide();
+                    }else{
+                        $('#form-input-fitur').show();
                     }
                 }
             });
@@ -750,6 +760,8 @@
                 },function(data){
                     //remove from table
                     obj.parent().parent().fadeOut(500);
+                    //update cost est
+                    costEst();
                     alert('Delete fitur ok');
                 }).fail(function(data){
                    alert('Delete fitur gagal') ;
@@ -771,6 +783,9 @@
         }
         costEst();
 
+        //untuk mengatasi masalah tab pertama yang tidak muncul ketika sata pertama kali page di load
+        $('#tab-variable-cost').click();
+        $('#tab-home').click();
 
         //END OF JQUERY
     });

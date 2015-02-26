@@ -57,7 +57,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'app_project_cost_est',
 			'username'  => 'root',
-			'password'  => '',
+			'password'  => 'root',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

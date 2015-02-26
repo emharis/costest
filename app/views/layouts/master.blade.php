@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <base href="{{ URL::to('/') }}">
+        <base href="{{ URL::to('/') }}/">
         <meta charset="utf-8">
         <title>Cost Estimation System</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
